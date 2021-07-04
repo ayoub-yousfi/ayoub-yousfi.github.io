@@ -1,0 +1,130 @@
+@import "https://fonts.googleapis.com/css?family=Droid+Sans";
+.innerbox{
+	white-space: nowrap;
+	position:absolute;
+	left:0;
+	top:0;
+	transition:0.3s left;
+}
+
+#team{
+	width:100%;
+}
+
+#team.col-sm-12{
+	width:100%;
+}
+
+.formation{
+	
+	height:100px;
+	text-align:center;
+	font-family:'Droid Sans', sans-serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.formation .box{
+	width:750px;
+	float:left;
+	overflow:hidden;
+	height:100px;
+	position:relative;
+}
+
+
+
+.formation .kisi{
+	width:250px;
+	float:left;
+	transition:0.6s filter;
+}
+
+.formation .box img{
+	width:200px;
+	height:100px;
+    margin-right:100px;
+}
+
+.box p{
+	font-weight:bold;
+	color:#333;
+}
+
+.box span{
+	display:inline-block;
+	padding:4px 10px;
+	border-radius:50px;
+	background:red;
+	color:white;
+	width:auto;
+	font-weight:Bold;
+	margin-top:5px;
+	text-transform:uppercase;
+	font-size:10pt;
+}
+
+.formation .left, .formation .right{
+	width:50px;
+	height:100%;
+	float:left;
+	padding-top:20px;
+	text-align:center;
+}
+
+
+
+
+.formation .kisi:not(.active){
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+	
+}
+
+.formation .bottom{
+    margin-left:37px;
+	width:220px;
+	height:30px;
+	clear:both;
+	display:block;
+	line-height:30px;
+	border-radius:50px;
+	transition:0.3s color, 0.3s background, 0.2s width;
+}
+
+.formation .bottom.red{
+	background:#D8242F;
+	color:white;
+}
+
+.formation .bottom.gold{
+	background:goldenrod;
+	color:#fff;
+}
+
+.formation .bottom.silv{
+	background:silver;
+	color:#333;
+}
+
+.formation .bottom.bronze{
+	background:#cd7f32;
+	color:#fff;
+}
+
+
+
+.formation .bottom.sup{
+	background:#f1f1f1;
+	color:#333;
+}
+
+a:link 
+		{ 
+		text-decoration:none; 
+		} 

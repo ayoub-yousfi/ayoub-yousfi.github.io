@@ -1,0 +1,12 @@
+<?php
+session_start();
+if(isset($_POST['cocher'])){
+    setcookie("visiteur",session_id(),time()+60);
+    setcookie("login",$_POST['user'],time()+60);
+    header('location:index.php');
+}
+else
+{
+    header('location:index.php');
+}
+?>
