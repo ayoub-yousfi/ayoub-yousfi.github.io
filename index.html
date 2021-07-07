@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Successway</title>
+	<title>SuccessWay</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
-	<link rel="icon" type="image/png" sizes="40x40" href="images/Capture.PNG">
+	<link rel="icon" type="image/png" sizes="40x40" href="images/logo.PNG">
 
     <!-- 
 	Workforce CSS Template
@@ -18,10 +18,37 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">		
 	<link rel="stylesheet" href="css/templatemo-style.css">
+	<link rel="stylesheet" href="css/contact.css">
+	<link rel="stylesheet" href="css/sponsors.css">
+	<link rel="stylesheet" href="css/formation_encours.css">
+	<link rel="stylesheet" href="css/counterstats.css">
+	<link rel="stylesheet" type="text/css" href="css/chatbot.css">
+	
+
+	<?php
+	/*partie formations en cours*/
+	session_start();
+
+	$connection = mysqli_connect('localhost','root', '');
+	mysqli_select_db($connection,'successway');
+
+	$query_formation = "select * from formations_encours ORDER BY date_debut DESC";
+	$exec_query_f = mysqli_query($connection,$query_formation);
+
+	$query_actualite = "select * from actualites";
+	$exec_query_a = mysqli_query($connection,$query_actualite);
+?>
+
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
-	<div class="preloader">
-		<div class="sk-spinner sk-spinner-rotating-plane"></div>
+  
+	<div class="preloader" >
+		<div id="mdiv">
+        	<div class="cdiv">
+            	<div class="rot"></div>
+            	<h1 class="lh">successway</h1>
+        	</div>
+    	</div>
 	</div>
 	<nav class="navbar navbar-fixed-top custom-navbar" role="navigation">
 		<div class="container">
@@ -31,18 +58,25 @@
 					<span class="icon icon-bar"></span>
 					<span class="icon icon-bar"></span>
 				</button>
-				<a href="index.php" class="navbar-brand">successway</a>
+				<a href="index.php" class="navbar-brand">SuccessWay</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#home" class="smoothScroll">Accueil</a></li>
-					<li><a href="#service" class="smoothScroll">Présentation</a></li>
-					<li><a href="#about" class="smoothScroll">Formation en cours</a></li>
-					<li><a href="#portfolio" class="smoothScroll">Services</a></li>
-					<li><a href="#contact" class="smoothScroll">Réferences</a></li>
-					<li><a href="#contact" class="smoothScroll">Formations réalisée</a></li>
-					<li><a href="choix.php" class="smoothScroll">contact</a></li>
+					<li><a href="index.php" class="smoothScroll">Accueil</a></li>
+					<li><a href="presentation.php" class="smoothScroll">Présentation</a></li>
+					<li><a href="#fencours" class="smoothScroll">Formations en cours</a></li>
+					<li><a href="#portfolio" class="smoothScroll">Actualités</a></li>
+					<li><a href="#part" class="smoothScroll">Réferences</a></li>
+					<li><a href="formations_realisees.php" class="smoothScroll">Formations réalisées</a></li>
+					<li><a href="#contact1" class="smoothScroll">contact</a></li>
 					<li><a href="choix.php" class="smoothScroll">s'identifier</a></li>
+					<div>
+					<?php
+if(isset($_COOKIE['visiteur'])){
+	echo 'bienvenu avec session active : '. $_COOKIE['user'];
+}
+?>
+</div>
 					
 				</ul>
 			</div>
@@ -78,73 +112,191 @@
 		</div>
 	</section>
 	<!-- end home -->
-	<!-- start service -->
-	<section id="service">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center wow bounceIn">
-					<h2>Formations en cours</h2>
-					<hr>
-					<h4>we specialize in web and mobile</h4>
+	<div class="botIcon">
+	<div class="botIconContainer">
+		<div class="iconInner">
+			<i class="fa fa-commenting" aria-hidden="true"></i>
+		</div>
+	</div>
+	<div class="Layout Layout-open Layout-expand Layout-right">
+		<div class="Messenger_messenger">
+			<div class="Messenger_header">
+				<span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+			</div>
+			<div class="Messenger_content">
+				<div class="Messages">
+					<div class="Messages_list"></div>
 				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="media">
-						<div class="media-object media-left wow fadeIn" data-wow-delay="0.6s">
-							<i class="fa fa-laptop"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Website Re-designed</h3>
-							<p>Workforce HTML CSS Template is a mobile friendly site design layout with animated transitions. You can feel free to download and edit this for your sites.</p>
-						</div>
+				<form id="messenger">
+					<div class="Input Input-blank">
+<!-- 							<textarea name="msg" class="Input_field" placeholder="Send a message..."></textarea> -->
+						<input name="msg" class="Input_field" placeholder="Send a message...">
+						<button type="submit" class="Input_button Input_button-send">
+							<div class="Icon">
+								<svg viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									<g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">
+										<path d="M5.42994667,44.5306122 L16.5955554,44.5306122 L21.049938,20.423658 C21.6518463,17.1661523 26.3121212,17.1441362 26.9447801,20.3958097 L31.6405465,44.5306122 L42.5313185,44.5306122 L23.9806326,7.0871633 L5.42994667,44.5306122 Z M22.0420732,48.0757124 C21.779222,49.4982538 20.5386331,50.5306122 19.0920112,50.5306122 L1.59009899,50.5306122 C-1.20169244,50.5306122 -2.87079654,47.7697069 -1.64625638,45.2980459 L20.8461928,-0.101616237 C22.1967178,-2.8275701 25.7710778,-2.81438868 27.1150723,-0.101616237 L49.6075215,45.2980459 C5.08414042,47.7885641 49.1422456,50.5306122 46.3613062,50.5306122 L29.1679835,50.5306122 C27.7320366,50.5306122 26.4974445,49.5130766 26.2232033,48.1035608 L24.0760553,37.0678766 L22.0420732,48.0757124 Z" id="sendicon" fill="#96AAB4" fill-rule="nonzero"></path>
+									</g>
+								</svg>
+							</div>
+						</button>
 					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="media">
-						<div class="media-object media-left wow fadeIn" data-wow-delay="0.6s">
-							<i class="fa fa-android"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">New Mobile App</h3>
-							<p>Please spread a word to your friends about templatemo site. It would be helpful. Credit goes to <a rel="nofollow noopener" href="https://pixabay.com">Pixabay</a> for images used in this template.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="media">
-						<div class="media-object media-left wow fadeIn" data-wow-delay="0.6s">
-							<i class="fa fa-paper-plane"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Digital Marketing</h3>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="media">
-						<div class="media-object media-left wow fadeIn" data-wow-delay="0.6s">
-							<i class="fa fa-html5"></i>
-						</div>
-						<div class="media-body">
-							<h3 class="media-heading">Coding HTML5 &amp; CSS3</h3>
-							<p>This is a CSS layout with Bootstrap v3.3.4 kit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-						</div>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
+	</div>
+</div>
+<!-- Chatbot -->
+
+
+
+
+	<!-- start service -->
+	<br>
+	<section id="fencours">
+		<div class="row">
+			
+				<div class="divider-des">
+					<h2 class="text-uppercase">Formations en cours</h2>
+					
+					<h4 style="color:#D8242F">Assurer la réussite de votre future vie professionnelle</h4>
+					<div id="team">
+						<div class="col-sm-12"></div>
+					</div>
+					<br><br>
+
+					<center>
+						<div class="formation">
+						
+							<div class="left"><i class="fa fa-angle-left fa-3x" style="color:#333;"></i></div>
+							
+							<div class="box">
+								<div class="innerbox" >
+								<?php
+									$cpt=0;
+									while($row=mysqli_fetch_array($exec_query_f)){
+								?>	
+									<div class="kisi" >
+									<a href="description_formation_encours.php?title=<?php echo $row['titre']; ?>"  >
+
+									<?php 
+										echo "<img src=\"backend/img_formations_encours.php?id=".$row['id']."\"class=\"img-responsive\" >";
+									?>
+									</a>
+									</div>
+									
+									<?php
+										$cpt++;
+										if ($cpt>=2)
+										{
+											
+											 $cpt=0;
+										}
+									}
+									?>
+									<div class="kisi">
+										<a href="formations_encours.php"  >
+										<img src="images/formations/voirplus.png" alt="" class="resim" />	
+										</a>
+									</div>
+								</div>
+							</div>
+							
+							<div class="right"><i class="fa fa-angle-right fa-3x" style="color:#333;"></i></div>
+							<br><br><br><br><br><br>
+							<?php mysqli_data_seek($exec_query_f,0)?>
+							
+							<div class="box">
+								<div class="innerbox" >
+									<?php
+										$cpt=0;
+										while($row=mysqli_fetch_array($exec_query_f)){
+									?>
+									<div class="kisi" >
+									<a href="description_formation_realisee.php?title=<?php echo $row['titre']; ?>"  >
+									<center><div class="bottom" ><?php echo $row['titre'];?></div></center>
+									</a>
+									</div>
+									<?php
+										$cpt++;
+										if ($cpt>=2)
+										{
+											
+											 $cpt=0;
+										}
+									}
+									?>
+									<div class="kisi" >
+									<a href="formations_realisees.php"  >
+										<center><div class="bottom" >Voir Plus</div></center>
+								    </a>
+								</div>
+								</div>
+							</div>
+							
+						</div>
+					</center>
+				</div>
+			
+		</div>		
 	</section>
 	<!-- end service -->
+
+			
+	
 	<!-- start divider -->
-	<div class="divider">
+	<div class="divider" id="part">
 		<div class="overlay">
 			<div class="container">
 				<div class="row">
 					<div class="divider-des">
 						<h3 class="text-uppercase">Nos Partenaires stratégiques</h3>
 						<p>Rejoignez nous</p>
-						
-						<button class="btn btn-default text-uppercase">Download</button>
+						<div id="team">
+	<div class="col-sm-12"></div>
+</div>
+
+<center>
+<div class="sponsors">
+	<div class="left"><i class="fa fa-angle-left fa-3x" style="color:#333;"></i></div>
+	<div class="box">
+		<div class="innerbox">
+		
+		<div class="kisi">
+				<img src="images/ami.gif" alt="" class="resim" />
+		</div>
+		
+		<div class="kisi">
+				<img src="images/biat.jpg" alt="" class="resim" />
+		</div>
+			
+				<div class="kisi">
+				<img src="images/enetcom.png" alt="" class="resim" />
+		</div>
+			
+		<div class="kisi">
+				<img src="images/ecje.png" alt="" class="resim" />
+		</div>
+			
+		<div class="kisi">
+				<img src="images/Zitouna.gif" alt="" class="resim" />
+		</div>
+			
+			<div class="kisi">
+				<img src="images/amazon.png" alt="" class="resim" />
+		</div>
+			
+			<div class="kisi">
+				<img src="images/micro.jpg" alt="" class="resim" />
+		</div>
+			
+		</div>
+	</div>
+	<div class="right"><i class="fa fa-angle-right fa-3x" style="color:#333;"></i></div>
+	<center><div class="bottom">Platinium Sponsor</div></center>
+	
+</div>
+</center>
 					</div>
 				</div>
 			</div>
@@ -210,15 +362,16 @@
 	</section>
 	 end about --> 
 	<!-- start portfolio -->
-	<section id="portfolio">
-		<div class="container">
+	<section id="portfolio" >
+		<div class="container" id="actualite">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="wow bounceIn">
-						<h2 class="wow bounceIn">Actualité</h2>
+						<h2 class="wow bounceIn">Actualités</h2>
 					</div>
 					<div class="iso-section wow fadeIn" data-wow-delay="0.6s">
-
+						<br><br>
+						<!--				
 						<ul class="filter-wrapper clearfix">
 							<li><a href="#" data-filter="*" class="selected opc-main-bg">All</a></li>
 							<li><a href="#" class="opc-main-bg" data-filter=".graphic">WEB</a></li>
@@ -226,111 +379,190 @@
 							<li><a href="#" class="opc-main-bg" data-filter=".wallpaper">DATA SCIENCE</a></li>
 							<li><a href="#" class="opc-main-bg" data-filter=".wallpaper">MANAGEMENT</a></li>
 						</ul>
-
+						-->
 						<div class="iso-box-section">
 							<div class="iso-box-wrapper col4-iso-box">
-
+							<?php
+									$cpt=0;
+									while($row=mysqli_fetch_array($exec_query_a)){
+								?>
 								<div class="iso-box graphic photoshop wallpaper col-md-4 col-sm-6 col-xs-12">
+								
 									<div class="portfolio-thumb">
-										<img src="images/html.png" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
+									<?php 
+									echo "<img src=\"backend/img_actualites.php?id=".$row['id']."\"class=\"img-responsive\">";
+									?>										
+									<div class="portfolio-overlay">
 											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>	
+												<a href="description_actualite.php?title=<?php echo $row['titre']; ?> "  >
+												<i class="fa fa-search-plus"></i></a>
+												<h4> <?php echo $row['titre']; ?></h4>
+												<p> 
+												<?php 
+													$nbChar = 40; // Nb. de caractères sans '...'
+	
+													if(strlen($row['description']) >= $nbChar)
+													$row['description'] = substr($row['description'], 0, $nbChar).' ...';
+													
+													echo $row['description']; 
+												?>
+												</p>	
 											</div>											
 										</div>
 									</div>
+								
 								</div>
-								<div class="iso-box graphic wallpaper col-md-4 col-sm-6 col-xs-12">
-									<div class="portfolio-thumb">
-										<img src="images/portfolio-img-2.jpg" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
-											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="iso-box wallpaper col-md-4 col-sm-6 col-xs-12">
-									<div class="portfolio-thumb">
-										<img src="images/portfolio-img-3.jpg" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
-											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="iso-box graphic col-md-4 col-sm-6 col-xs-12">
-									<div class="portfolio-thumb">
-										<img src="images/portfolio-img-4.jpg" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
-											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="iso-box wallpaper col-md-4 col-sm-6 col-xs-12">
-									<div class="portfolio-thumb">
-										<img src="images/portfolio-img-5.jpg" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
-											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="iso-box graphic photoshop col-md-4 col-sm-6 col-xs-12">
-									<div class="portfolio-thumb">
-										<img src="images/portfolio-img-6.jpg" class="fluid-img" alt="portfolio img">
-										<div class="portfolio-overlay">
-											<div class="portfolio-description">
-												<a href="#" class="fa fa-search"></a>
-												<a href="#" class="fa fa-link"></a>
-												<h4>Project title</h4>
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm.</p>
-											</div>
-										</div>
-									</div>
-								</div>
+								<?php
+									$cpt++;
+									if ($cpt>=2)
+									{
+										$cpt=0;
+									}
+								}
+								?>
+								
 							</div>
 						</div>
 					</div>
 				</div>
+				
 			</div>
+			<div class="col-md-12 text-center wow bounceIn">
+                <div class="col" >
+                    <a href="modif_actualites.php" style="color:#D8242F ; font-size: 23px;">Modifier les actualités</a>        
+                </div>
+                    <br>
+            </div>
 		</div>
 	</section>
 	<!-- end portfolio -->
-	<!-- start contact -->
+
+<section id="counter-stats" class="wow fadeInRight" data-wow-duration="1.4s">
+
 	<div class="container">
+		<div class="container2">
+		<p align="center" style="color: white">The Way of our Success</p>
+			<div class="col-lg-3 stats">
+				<i class="fa fa-code" aria-hidden="true"></i>
+				<div class="counting" data-count="250">0</div>
+				<h5>Trainings</h5>
+			</div>
+
+			<div class="col-lg-3 stats">
+				<i class="fa fa-check" aria-hidden="true"></i>
+				<div class="counting" data-count="120">0</div>
+				<h5>Projects done</h5>
+			</div>
+
+			<div class="col-lg-3 stats">
+				<i class="fa fa-user" aria-hidden="true"></i>
+				<div class="counting" data-count="100">0</div>
+				<h5>Happy clients</h5>
+			</div>
+
+			<div class="col-lg-3 stats">
+				<i class="fa fa-coffee" aria-hidden="true"></i>
+				<div class="counting" data-count="999">0</div>
+				<h5>Cups of coffee</h5>
+			</div>
+
+
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+
+</section>
+
+<!-- end cont stats -->
+	
+	<!-- start contact -->
+	<!--<section id="contact" style="background-color: #1A4280">
+		<div class="container" >
+			<div class="row">
+				<div class="col-md-12">
+					<div class="wow bounceIn">
+						<h2 class="wow bounceIn">Contact</h2>
+						<hr>
+					</div>-->
+
+					<div id="bloc1" class="aligncenter">
+						<p>
+							<img  src="images/logo.PNG"  class="center" height="150px" width="200px">
+						</p>
+						<p style="color: #1A4280">Le Centre International de Formation Continue CIFOC est
+						un organisme privé de formation
+						continue agréé par l’état Tunisien sous le N° 09/404/12
+						Téléphone: (+216) 70 696 199 – (+216) 28 753 750
+						Fax: (+216) 71 690 114
+						Adresse: 35 Avenue de l’UMA, résidence Florence 
+						Appart. A24 – La Soukra 2036 Ariana</p>
+						<iframe width="300" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=34.759958559172006,%2010.77154014025968&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+						<a href="https://123movies-to.org"></a>
+						<br><style>.mapouter{position:right;text-align:right;height:500px;width:600px;}</style>
+						<style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
+					</div>
+						<!--
+					<div id="bloc2">
+						<p style="color: white;">Nos types des formations</p>
+						<p style="color: white;">Achat & Logistique</p>
+						<p style="color: white;">Assurance</p>
+						<p style="color: white;">Audit</p>
+						<p style="color: white;">Comptabilité</p>
+						<p style="color: white;">Douane & Commerce extérieur</p>
+						<p style="color: white;">Droit Social</p>
+						<p style="color: white;">Finance</p>
+						<p style="color: white;">Fiscalité approfondie</p>
+						<p style="color: white;">Formation sur mesure</p>
+						<p style="color: white;">Gestion des Ressources Humaines</p>
+						<p style="color: white;">Informatique et bureautique</p>
+						<p style="color: white;">Langues</p>
+						<p style="color: white;">Management</p>
+						<p style="color: white;">Marketing</p>
+						<p style="color: white;">Performance Industrielle</p>
+						<p style="color: white;">PNL</p>
+						<p style="color: white;">Qualité</p>
+
+					</div>
+					
+					<!--maps-->	
+					<!--	-->
+					<!-- end maps-->			
+					<!--<form action="#" method="post" role="form">
+						<div class="col-md-4 col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+							<input type="text" placeholder="Name" class="form-control">
+						</div>
+						<div class="col-md-4 col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+							<input type="email" placeholder="Email" class="form-control">
+						</div>
+						<div class="col-md-4 col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+							<input type="text" placeholder="Subject" class="form-control">
+						</div>
+						<div class="col-md-12 col-sm-12 wow fadeIn" data-wow-delay="0.9s">
+							<textarea class="form-control" rows="5" placeholder="Message"></textarea>
+						</div>
+						<div class="col-md-offset-3 col-sm-offset-3 col-sm-6 col-md-6 wow fadeIn" data-wow-delay="0.3s">
+							<input type="submit" value="Send Message" class="form-control">
+						</div>
+					</form>-->
+				<!--</div>
+			</div>
+		</div>
+	</section>-->
+	<div class="container" id="contact1">
   <div class="content">
     <div class="left-side">
       <div class="address details">
         <i class="fas fa-map-marker-alt"></i>
         <div class="topic">Address</div>
-        <div class="text-one">35 Avenue de l’UMA, résidence Florence </div>
-        <div class="text-two">Appart. A24 – La Soukra 2036 Ariana</div>
+        <div class="text-one">35 Avenue de l’UMA  </div>
+        <div class="text-two">résidence Florence</div>
       </div>
       <div class="phone details">
         <i class="fas fa-phone-alt"></i>
         <div class="topic">Phone</div>
-        <div class="text-one">(+216) 70 696 199 </div>
-        <div class="text-two"> (+216) 28 753 750</div>
+        <div class="text-one">(+216) 70 696 199</div>
+        <div class="text-two">(+216) 28 753 750</div>
       </div>
       <div class="email details">
         <div class="topic">Email</div>
@@ -339,24 +571,62 @@
       </div>
     </div>
     <div class="right-side">
-      <div class="topic-text">laisser un message</div><br>
-      <p>si vous avez un travail ou un besoin relié a notre centre, n'hésitez pas de laisser un message </p>
-      <form class="contact" action="" method="post">
+      <div class="topic-text">laisser un message</div>
+      <p>si vous avez un travail ou un besoin relié a notre centre, n'hésitez pas de laisser un message</p>
+      <form action="#">
         <div class="input-box">
-          <input id="name" type="text" placeholder="Enter your name">
+          <input type="text" placeholder="Enter your name">
         </div>
         <div class="input-box">
-          <input id="email" type="text" placeholder="Enter your email">
+          <input type="text" placeholder="Enter your email">
         </div>
         <div class="input-box message-box">
-		<textarea name="message" rows="5" placeholder="Your Message" required><textarea>
+			<input type="text" placeholder="message">
+
         </div>
         <div class="button">
-          <input type="submit" name="submit" class="send-btn" value="Send" >
+          <input type="button" value="Send Now" >
         </div>
       </form>
     </div>
   </div>
 </div>
+
+	<!-- end contact -->
+	
+	<footer style="src:\xampp\htdocs\success\dreamsnmotion_final_version\template\templatemo_461_workforce\images\slider;">
+		<div class="container1">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="social-icon wow fadeIn" data-wow-delay="0.3s">
+						<li><a href="https://www.facebook.com/SuccesswayTrainingCenter/" class="fa fa-facebook"></a></li>
+						<li><a href="https://www.instagram.com/successway_training_center/?hl=fr-ca" class="fa fa-instagram"></a></li>
+					</ul>
+					<p class="wow bounceIn">Copyright &copy; 2021 <span>Successway</span> created by 
+                     <a rel="nofollow noopener" href="https://enetcomje.com/"><span>Enet'com junior entreprise</span></a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+						
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.flexslider.js"></script>
+	<script src="js/isotope.js"></script>
+	<script src="js/imagesloaded.min.js"></script>
+	<script type="text/javascript" src="js/jquery3.js"></script>
+	<script  src="js/chatbot.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/countstats.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/sponsors.js"></script>
+	<script src="js/formation_encours.js"></script>
+	<script type="text/javascript">
+    if(window.history.replaceState){
+      window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
+	
 </body>
 </html>
